@@ -15,6 +15,9 @@ urlpatterns = [
     url(r'^data/download/(?P<pk>\w+)/$', data_views.DataDownload.as_view(),
         name='core_json_app_rest_data_download'),
 
+    url(r'^data/(?P<pk>\w+)/$', data_views.DataDetail.as_view(),
+        name='core_json_app_rest_data_detail'),
+
     url(r'^template/user/$',
         template_version_manager_views.UserTemplateList.as_view(),
         name='core_json_app_rest_user_template_list'),
