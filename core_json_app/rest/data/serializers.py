@@ -1,16 +1,17 @@
 """Serializers used throughout the data Rest API
 """
 
-from rest_framework_mongoengine.serializers import DocumentSerializer
 from django_mongoengine import fields
+from rest_framework_mongoengine.serializers import DocumentSerializer
+
 import core_json_app.components.data.api as data_api
 from core_main_app.components.data.models import Data
+from core_main_app.utils.xml import unparse
 
 
 class DataSerializer(DocumentSerializer):
     """ Data serializer
     """
-    dict_content = fields.DictField(blank=True)
 
     class Meta(object):
         """ Meta
@@ -18,6 +19,7 @@ class DataSerializer(DocumentSerializer):
         model = Data
         fields = ["id",
                   "template",
+                  "workspace",
                   "user_id",
                   "title",
                   "dict_content",
@@ -30,16 +32,16 @@ class DataSerializer(DocumentSerializer):
         """
         # Create data
         instance = Data(
+            dict_content=validated_data['dict_content'],
             template=validated_data['template'],
+            workspace=validated_data['workspace'] if 'workspace' in validated_data else None,
             title=validated_data['title'],
             user_id=str(validated_data['user'].id),
         )
-        # Set JSON content
-        instance.dict_content = validated_data['dict_content']
+        # set xml content
+        instance.xml_content = unparse(instance.dict_content, full_document=False)
         # Save the data
         data_api.upsert(instance, validated_data['user'])
-        # Encode the response body
-        instance.dict_content = validated_data['dict_content']
 
         return instance
 

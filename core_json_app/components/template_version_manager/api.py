@@ -2,10 +2,12 @@
 Template Version Manager API
 """
 from core_json_app.components.template import api as template_api
+from core_main_app.components.template import api as main_template_api
 from core_main_app.components.version_manager import api as version_manager_api
 from core_main_app.components.version_manager.utils import get_latest_version_name
-from core_main_app.components.template import api as main_template_api
 
+
+# TODO: see how to refactor, everything except upsert is duplicated from main
 def insert(template_version_manager, template):
     """Add a version to a template version manager.
 
@@ -30,5 +32,5 @@ def insert(template_version_manager, template):
         # return version manager
         return template_version_manager
     except Exception as e:
-        template_api.delete(template)
+        main_template_api.delete(template)
         raise e

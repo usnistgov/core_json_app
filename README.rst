@@ -22,4 +22,7 @@ Quick start
 
 .. code:: python
 
-    url(r'^', include('core_json_app.urls')),
+    re_path(r'^', include('core_json_app.urls')),
+    re_path(r'^', include("core_main_app.urls")),
+
+Url for core_json_app should be placed above core_main_app.

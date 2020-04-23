@@ -3,11 +3,8 @@ Template API
 """
 import hashlib
 import logging
-import json
 
-
-from jsonschema import Draft7Validator
-
+from core_json_app.utils.json_utils import is_schema_valid
 
 logger = logging.getLogger(__name__)
 
@@ -22,8 +19,9 @@ def upsert(template):
 
     """
     # Check if schema is valid
-    Draft7Validator.check_schema(json.loads(template.content))
+    is_schema_valid(template.content)
     # Get hash for the template
+    # TODO: create proper hash function
     template.hash = hashlib.md5(template.content.encode("utf-8")).hexdigest()
     # Save template
     return template.save()
