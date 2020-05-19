@@ -1,3 +1,5 @@
+from core_main_app.utils.databases.mongoengine_database import Database
+
 SECRET_KEY = 'fake-key'
 
 INSTALLED_APPS = [
@@ -12,6 +14,18 @@ INSTALLED_APPS = [
     # Local apps
     "tests",
 ]
+
+# IN-MEMORY TEST DATABASE
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
+    },
+}
 
 MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -37,3 +51,10 @@ TEMPLATES = [
         },
     },
 ]
+
+
+MOCK_DATABASE_NAME = 'db_mock'
+MOCK_DATABASE_HOST = 'mongomock://localhost'
+
+database = Database(MOCK_DATABASE_HOST, MOCK_DATABASE_NAME)
+database.connect()
