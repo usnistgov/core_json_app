@@ -16,15 +16,22 @@ class DataSerializer(DocumentSerializer):
     class Meta(object):
         """ Meta
         """
+
         model = Data
-        fields = ["id",
-                  "template",
-                  "workspace",
-                  "user_id",
-                  "title",
-                  "dict_content",
-                  "last_modification_date"]
-        read_only_fields = ('id', 'user_id', 'last_modification_date', )
+        fields = [
+            "id",
+            "template",
+            "workspace",
+            "user_id",
+            "title",
+            "dict_content",
+            "last_modification_date",
+        ]
+        read_only_fields = (
+            "id",
+            "user_id",
+            "last_modification_date",
+        )
 
     def create(self, validated_data):
         """
@@ -32,16 +39,18 @@ class DataSerializer(DocumentSerializer):
         """
         # Create data
         instance = Data(
-            dict_content=validated_data['dict_content'],
-            template=validated_data['template'],
-            workspace=validated_data['workspace'] if 'workspace' in validated_data else None,
-            title=validated_data['title'],
-            user_id=str(validated_data['user'].id),
+            dict_content=validated_data["dict_content"],
+            template=validated_data["template"],
+            workspace=validated_data["workspace"]
+            if "workspace" in validated_data
+            else None,
+            title=validated_data["title"],
+            user_id=str(validated_data["user"].id),
         )
         # set xml content
         instance.xml_content = unparse(instance.dict_content, full_document=False)
         # Save the data
-        data_api.upsert(instance, validated_data['user'])
+        data_api.upsert(instance, validated_data["user"])
 
         return instance
 
@@ -49,10 +58,8 @@ class DataSerializer(DocumentSerializer):
         """
         Update and return an existing `Data` instance, given the validated data.
         """
-        instance.title = validated_data.get('title', instance.title)
-        instance.dict_content = validated_data.get('dict_content', instance.dict_content)
-        return data_api.upsert(instance, validated_data['user'])
-
-
-
-
+        instance.title = validated_data.get("title", instance.title)
+        instance.dict_content = validated_data.get(
+            "dict_content", instance.dict_content
+        )
+        return data_api.upsert(instance, validated_data["user"])

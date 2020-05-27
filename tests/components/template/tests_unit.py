@@ -11,7 +11,7 @@ from tests.test_utils import create_template, get_valid_schema, get_invalid_sche
 
 
 class TestTemplateUpsert(TestCase):
-    @patch.object(Template, 'save')
+    @patch.object(Template, "save")
     def test_template_upsert_valid_template(self, mock_save):
         # Arrange
         template = create_template(get_valid_schema())

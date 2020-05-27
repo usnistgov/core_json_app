@@ -4,7 +4,9 @@ from bson import ObjectId
 
 from core_main_app.components.data.models import Data
 from core_main_app.components.template.models import Template
-from core_main_app.components.template_version_manager.models import TemplateVersionManager
+from core_main_app.components.template_version_manager.models import (
+    TemplateVersionManager,
+)
 
 
 def create_template_version_manager(title="schema.json", is_disabled=False, user_id=1):
@@ -25,7 +27,7 @@ def create_template_version_manager(title="schema.json", is_disabled=False, user
         user=user_id,
         is_disabled=is_disabled,
         disabled_versions=[],
-        _cls=TemplateVersionManager.class_name
+        _cls=TemplateVersionManager.class_name,
     )
     return tvm
 
@@ -54,9 +56,7 @@ def create_data(template, user_id, title, content):
     Returns:
 
     """
-    data = Data(template=template,
-                user_id=user_id,
-                title=title)
+    data = Data(template=template, user_id=user_id, title=title)
     data.dict_content = content
     return data
 
@@ -110,11 +110,7 @@ def get_valid_data():
     Returns:
 
     """
-    return {
-        "firstName": "John",
-        "lastName": "Doe",
-        "age": 21
-    }
+    return {"firstName": "John", "lastName": "Doe", "age": 21}
 
 
 def get_invalid_data():
@@ -125,11 +121,7 @@ def get_invalid_data():
     Returns:
 
     """
-    return {
-        "firstName": "John",
-        "lastName": "Doe",
-        "age": "John"
-    }
+    return {"firstName": "John", "lastName": "Doe", "age": "John"}
 
 
 def get_different_data():

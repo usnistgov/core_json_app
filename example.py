@@ -21,61 +21,48 @@ json_schema = {
     "title": "Person",
     "type": "object",
     "properties": {
-        "firstName": {
-            "type": "string",
-            "description": "The person's first name."
-        },
-        "lastName": {
-            "type": "string",
-            "description": "The person's last name."
-        },
+        "firstName": {"type": "string", "description": "The person's first name."},
+        "lastName": {"type": "string", "description": "The person's last name."},
         "age": {
             "description": "Age in years which must be equal to or greater than zero.",
             "type": "integer",
-            "minimum": 0
-        }
-    }
+            "minimum": 0,
+        },
+    },
 }
 
-data_json = {
-    "firstName": "John",
-    "lastName": "Doe",
-    "age": 21
-}
+data_json = {"firstName": "John", "lastName": "Doe", "age": 21}
 
 print(" ### Add Template ###")
-data = {"title": "Template-" + str(datetime.now()),
-        "filename": "schema.json",
-        "content": json.dumps(json_schema)}
+data = {
+    "title": "Template-" + str(datetime.now()),
+    "filename": "schema.json",
+    "content": json.dumps(json_schema),
+}
 
-r = requests.post(POST_TEMPLATE_URL,
-                  data, auth=(USER, PSWD),
-                  verify=False)
+r = requests.post(POST_TEMPLATE_URL, data, auth=(USER, PSWD), verify=False)
 response = r.json()
 print(response)
 assert r.status_code == 201
-template_id = response['id']
+template_id = response["id"]
 
 
 print(" ### Add Data ###")
-data_to_send = {"title": "Data-" + str(datetime.now()),
-                "template": str(template_id),
-                "dict_content": data_json}
+data_to_send = {
+    "title": "Data-" + str(datetime.now()),
+    "template": str(template_id),
+    "dict_content": data_json,
+}
 
-r = requests.post(POST_DATA_URL,
-                  json=data_to_send,
-                  auth=(USER, PSWD),
-                  verify=False)
+r = requests.post(POST_DATA_URL, json=data_to_send, auth=(USER, PSWD), verify=False)
 response = r.json()
 print(response)
 assert r.status_code == 201
-data_id = response['id']
+data_id = response["id"]
 
 
 print(" ### Get Data ###")
-r = requests.get(GET_DATA_URL + data_id,
-                 auth=(USER, PSWD),
-                 verify=False)
+r = requests.get(GET_DATA_URL + data_id, auth=(USER, PSWD), verify=False)
 response = r.json()
 print(response)
 assert r.status_code == 200
@@ -83,10 +70,7 @@ assert r.status_code == 200
 
 print(" ### Query Data ###")
 data_to_send = {"query": {"firstName": "John"}}
-r = requests.get(QUERY_DATA_URL,
-                 json=data_to_send,
-                 auth=(USER, PSWD),
-                 verify=False)
+r = requests.get(QUERY_DATA_URL, json=data_to_send, auth=(USER, PSWD), verify=False)
 response = r.json()
 print(response)
 assert r.status_code == 200

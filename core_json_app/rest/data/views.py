@@ -18,6 +18,7 @@ from core_main_app.utils.file import get_file_http_response
 class DataList(main_rest_views.DataList):
     """ List all user Data, or create a new one.
     """
+
     permission_classes = (IsAuthenticated,)
     serializer = json_app_serializers.DataSerializer
 
@@ -25,6 +26,7 @@ class DataList(main_rest_views.DataList):
 class DataDetail(main_rest_views.DataDetail):
     """ Retrieve, update or delete a Data
     """
+
     permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer = json_app_serializers.DataSerializer
 
@@ -71,13 +73,17 @@ class DataDownload(APIView):
             # Get object
             data_object = self.get_object(request, pk)
 
-            return get_file_http_response(json.dumps(data_object.dict_content), data_object.title, 'application/json',
-                                          'json')
+            return get_file_http_response(
+                json.dumps(data_object.dict_content),
+                data_object.title,
+                "application/json",
+                "json",
+            )
         except Http404:
-            content = {'message': 'Data not found.'}
+            content = {"message": "Data not found."}
             return Response(content, status=status.HTTP_404_NOT_FOUND)
         except Exception as api_exception:
-            content = {'message': str(api_exception)}
+            content = {"message": str(api_exception)}
             return Response(content, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

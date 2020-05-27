@@ -25,4 +25,3 @@ def upsert(template):
     template.hash = hashlib.md5(template.content.encode("utf-8")).hexdigest()
     # Save template
     return template.save()
-

@@ -36,5 +36,3 @@ def is_schema_valid(schema):
         Draft7Validator.check_schema(json.loads(schema))
     except Exception as e:
         raise JSONError(str(e))
-
-

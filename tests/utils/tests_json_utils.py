@@ -4,7 +4,13 @@ from unittest.case import TestCase
 
 from core_json_app.commons.exceptions import JSONError
 from core_json_app.utils.json_utils import is_schema_valid, validate_json_data
-from tests.test_utils import get_valid_schema, get_invalid_schema, get_invalid_data, get_different_data, get_valid_data
+from tests.test_utils import (
+    get_valid_schema,
+    get_invalid_schema,
+    get_invalid_data,
+    get_different_data,
+    get_valid_data,
+)
 
 
 class TestIsSchemaValid(TestCase):
@@ -27,6 +33,3 @@ class TestValidateJsonData(TestCase):
     def test_validate_json_data_with_data_for_different_schema(self):
         # Schema doesn't require fields, completely different data is valid
         validate_json_data(get_different_data(), get_valid_schema())
-
-
-

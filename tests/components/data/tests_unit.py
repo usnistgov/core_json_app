@@ -11,18 +11,14 @@ from tests.test_utils import create_data, create_template, get_valid_schema
 
 
 class TestDataUpsert(TestCase):
-    @patch.object(data_api, '_save')
+    @patch.object(data_api, "_save")
     def test_data_upsert_valid_data(self, mock_save):
         # Arrange
         template = create_template(get_valid_schema())
-        json_data = {
-          "firstName": "John",
-          "lastName": "Doe",
-          "age": 21
-        }
-        data = create_data(template, user_id='3', title='title', content=json_data)
+        json_data = {"firstName": "John", "lastName": "Doe", "age": 21}
+        data = create_data(template, user_id="3", title="title", content=json_data)
         mock_save.return_value = data
-        mock_user = create_mock_user('3')
+        mock_user = create_mock_user("3")
         # Act # Assert
         result = data_api.upsert(data, mock_user)
         self.assertEquals(data, result)
@@ -30,17 +26,9 @@ class TestDataUpsert(TestCase):
     def test_data_upsert_invalid_value_raises_error(self):
         # Arrange
         template = create_template(get_valid_schema())
-        json_data = {
-          "firstName": "John",
-          "lastName": "Doe",
-          "age": "John"
-        }
-        data = create_data(template, user_id='3', title='title', content=json_data)
-        mock_user = create_mock_user('3')
+        json_data = {"firstName": "John", "lastName": "Doe", "age": "John"}
+        data = create_data(template, user_id="3", title="title", content=json_data)
+        mock_user = create_mock_user("3")
         # Act # Assert
         with self.assertRaises(JSONError):
             data_api.upsert(data, mock_user)
-
-
-
-

@@ -7,16 +7,25 @@ from mock.mock import patch
 
 from core_json_app.components.template_version_manager import api as version_manager_api
 from core_main_app.commons.exceptions import ModelError
-from core_main_app.components.template_version_manager.models import TemplateVersionManager
-from tests.test_utils import create_template, get_valid_schema, create_template_version_manager, get_invalid_schema
+from core_main_app.components.template_version_manager.models import (
+    TemplateVersionManager,
+)
+from tests.test_utils import (
+    create_template,
+    get_valid_schema,
+    create_template_version_manager,
+    get_invalid_schema,
+)
 
 
 class TestTemplateVersionManagerInsert(TestCase):
-
-    @patch('core_main_app.components.template_version_manager.models.TemplateVersionManager.save')
-    @patch('core_main_app.components.template.models.Template.save')
-    def test_create_version_manager_returns_version_manager(self, mock_save_template,
-                                                            mock_save_template_version_manager):
+    @patch(
+        "core_main_app.components.template_version_manager.models.TemplateVersionManager.save"
+    )
+    @patch("core_main_app.components.template.models.Template.save")
+    def test_create_version_manager_returns_version_manager(
+        self, mock_save_template, mock_save_template_version_manager
+    ):
         # Arrange
         template = create_template(get_valid_schema())
         mock_save_template.return_value = template
@@ -30,8 +39,10 @@ class TestTemplateVersionManagerInsert(TestCase):
         # Assert
         self.assertIsInstance(result, TemplateVersionManager)
 
-    @patch('core_main_app.components.template.models.Template.save')
-    def test_create_version_manager_raises_exception_if_error_in_create_template(self, mock_save):
+    @patch("core_main_app.components.template.models.Template.save")
+    def test_create_version_manager_raises_exception_if_error_in_create_template(
+        self, mock_save
+    ):
         # Arrange
         template = create_template(get_valid_schema())
 
@@ -42,12 +53,14 @@ class TestTemplateVersionManagerInsert(TestCase):
         with self.assertRaises(django_exceptions.ValidationError):
             version_manager_api.insert(mock_version_manager, template)
 
-    @patch('core_main_app.components.template.models.Template.delete')
-    @patch('core_main_app.components.template_version_manager.models.TemplateVersionManager.save')
-    @patch('core_main_app.components.template.models.Template.save')
-    def test_create_version_manager_raises_exception_if_error_in_create_version_manager(self, mock_save_template,
-                                                                                        mock_save_version_manager,
-                                                                                        mock_delete_template):
+    @patch("core_main_app.components.template.models.Template.delete")
+    @patch(
+        "core_main_app.components.template_version_manager.models.TemplateVersionManager.save"
+    )
+    @patch("core_main_app.components.template.models.Template.save")
+    def test_create_version_manager_raises_exception_if_error_in_create_version_manager(
+        self, mock_save_template, mock_save_version_manager, mock_delete_template
+    ):
         # Arrange
         template = create_template(get_valid_schema())
 
@@ -59,6 +72,3 @@ class TestTemplateVersionManagerInsert(TestCase):
         # Act + Assert
         with self.assertRaises(ModelError):
             version_manager_api.insert(version_manager, template)
-
-
-

@@ -11,6 +11,7 @@ from tests.test_utils import get_valid_schema
 class AccessControlDataFixture(FixtureInterface):
     """ Access Control Data fixture
     """
+
     USER_1_NO_WORKSPACE = 0
     USER_2_NO_WORKSPACE = 1
     USER_1_WORKSPACE_1 = 2
@@ -44,32 +45,36 @@ class AccessControlDataFixture(FixtureInterface):
 
         """
 
-        content = {
-            "root": {
-                "element": "value2"
-            }
-        }
+        content = {"root": {"element": "value2"}}
 
-        self.data_1 = Data(template=self.template,
-                           title='Data 1',
-                           user_id='1').save()
-        self.data_2 = Data(template=self.template,
-                           title='Data 2',
-                           user_id='2').save()
-        self.data_3 = Data(template=self.template,
-                           title='Data 3',
-                           user_id='1',
-                           workspace=self.workspace_1.id,
-                           dict_content=content).save()
-        self.data_4 = Data(template=self.template,
-                           title='DataDoubleTitle',
-                           user_id='2',
-                           workspace=self.workspace_2.id).save()
-        self.data_5 = Data(template=self.template,
-                           title='DataDoubleTitle',
-                           user_id='1',
-                           workspace=self.workspace_1.id).save()
-        self.data_collection = [self.data_1, self.data_2, self.data_3, self.data_4, self.data_5]
+        self.data_1 = Data(template=self.template, title="Data 1", user_id="1").save()
+        self.data_2 = Data(template=self.template, title="Data 2", user_id="2").save()
+        self.data_3 = Data(
+            template=self.template,
+            title="Data 3",
+            user_id="1",
+            workspace=self.workspace_1.id,
+            dict_content=content,
+        ).save()
+        self.data_4 = Data(
+            template=self.template,
+            title="DataDoubleTitle",
+            user_id="2",
+            workspace=self.workspace_2.id,
+        ).save()
+        self.data_5 = Data(
+            template=self.template,
+            title="DataDoubleTitle",
+            user_id="1",
+            workspace=self.workspace_1.id,
+        ).save()
+        self.data_collection = [
+            self.data_1,
+            self.data_2,
+            self.data_3,
+            self.data_4,
+            self.data_5,
+        ]
 
     def generate_template(self):
         """ Generate an unique Template.
@@ -89,14 +94,12 @@ class AccessControlDataFixture(FixtureInterface):
         Returns:
 
         """
-        self.workspace_1 = Workspace(title="Workspace 1",
-                                     owner='1',
-                                     read_perm_id='1',
-                                     write_perm_id='1').save()
-        self.workspace_2 = Workspace(title="Workspace 2",
-                                     owner='2',
-                                     read_perm_id='2',
-                                     write_perm_id='2').save()
+        self.workspace_1 = Workspace(
+            title="Workspace 1", owner="1", read_perm_id="1", write_perm_id="1"
+        ).save()
+        self.workspace_2 = Workspace(
+            title="Workspace 2", owner="2", read_perm_id="2", write_perm_id="2"
+        ).save()
 
     def generate_workspace_with_perm(self):
         """ Generate the workspaces and the perm object.
@@ -105,8 +108,8 @@ class AccessControlDataFixture(FixtureInterface):
 
         """
         try:
-            self.workspace_1 = workspace_api.create_and_save('Workspace 1')
-            self.workspace_2 = workspace_api.create_and_save('Workspace 2')
+            self.workspace_1 = workspace_api.create_and_save("Workspace 1")
+            self.workspace_2 = workspace_api.create_and_save("Workspace 2")
             self.data_3.workspace = self.workspace_1
             self.data_4.workspace = self.workspace_2
             self.data_5.workspace = self.workspace_1
