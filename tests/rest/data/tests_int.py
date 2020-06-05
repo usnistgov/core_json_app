@@ -72,7 +72,7 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
     ):
 
         # Arrange
-        self.data.update({"query": "{}", "workspaces": "{}"})
+        self.data.update(dict(query={}, workspaces={}))
 
         # Act
         response = RequestMock.do_request_post(
@@ -87,7 +87,7 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
     ):
 
         # Arrange
-        self.data.update({"query": "{}"})
+        self.data.update(dict(query={}))
         # Act
         response = RequestMock.do_request_post(
             data_rest_views.ExecuteLocalQueryView.as_view(), self.user2, data=self.data
@@ -105,10 +105,7 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
 
         # Arrange
         self.data.update(
-            {
-                "query": "{}",
-                "workspaces": '[{"id": "' + str(self.fixture.workspace_1.id) + '"}]',
-            }
+            dict(query={}, workspaces=[{"id": str(self.fixture.workspace_1.id)}],)
         )
 
         # Act
@@ -129,12 +126,11 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
         # Arrange
         self.data.update(
             dict(
-                query="{}",
-                workspaces='[{"id": "'
-                + str(self.fixture.workspace_1.id)
-                + '"},{"id": "'
-                + str(self.fixture.workspace_2.id)
-                + '"}]',
+                query={},
+                workspaces=[
+                    {"id": str(self.fixture.workspace_1.id)},
+                    {"id": str(self.fixture.workspace_2.id)},
+                ],
             )
         )
 
@@ -157,10 +153,11 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
         # Arrange
         self.data.update(
             dict(
-                query="{}",
-                workspaces='[{"id": "507f1f77bcf86cd799439011"},{"id": "'
-                + str(self.fixture.workspace_2.id)
-                + '"}]',
+                query={},
+                workspaces=[
+                    {"id": "507f1f77bcf86cd799439011"},
+                    {"id": str(self.fixture.workspace_2.id)},
+                ],
             )
         )
 
@@ -182,12 +179,11 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
         # Arrange
         self.data.update(
             dict(
-                query="{}",
-                workspaces='[{"id": "'
-                + str(self.fixture.workspace_1.id)
-                + '"},{"id": "'
-                + str(self.fixture.workspace_2.id)
-                + '"}]',
+                query={},
+                workspaces=[
+                    {"id": str(self.fixture.workspace_1.id)},
+                    {"id": str(self.fixture.workspace_2.id)},
+                ],
             )
         )
 
@@ -207,10 +203,10 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
 
         # Arrange
         self.data.update(
-            {
-                "query": '{"root.element": "value2"}',
-                "workspaces": '[{"id": "' + str(self.fixture.workspace_1.id) + '"}]',
-            }
+            dict(
+                query={"root.element": "value2"},
+                workspaces=[{"id": str(self.fixture.workspace_1.id)}],
+            )
         )
 
         # Act
@@ -229,10 +225,10 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
 
         # Arrange
         self.data.update(
-            {
-                "query": '{"root.element": "value2"}',
-                "workspaces": '[{"id": "' + str(self.fixture.workspace_2.id) + '"}]',
-            }
+            dict(
+                query={"root.element": "value2"},
+                workspaces=[{"id": str(self.fixture.workspace_2.id)}],
+            )
         )
 
         # Act
@@ -248,7 +244,7 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
     ):
 
         # Arrange
-        self.data.update({"query": "{}", "workspaces": '[{"id": "None"}]'})
+        self.data.update(dict(query={}, workspaces=[{"id": "None"}]))
 
         # Act
         response = RequestMock.do_request_post(
@@ -265,7 +261,7 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
     ):
 
         # Arrange
-        self.data.update({"query": "{}", "workspaces": '[{"id": "None"}]'})
+        self.data.update(dict(query={}, workspaces=[{"id": "None"}]))
 
         # Act
         response = RequestMock.do_request_post(
@@ -284,12 +280,10 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
 
         # Arrange
         self.data.update(
-            {
-                "query": "{}",
-                "workspaces": '[{"id": "None"},{"id": "'
-                + str(self.fixture.workspace_2.id)
-                + '"}]',
-            }
+            dict(
+                query={},
+                workspaces=[{"id": "None"}, {"id": str(self.fixture.workspace_2.id)}],
+            )
         )
 
         # Act
@@ -310,12 +304,10 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
 
         # Arrange
         self.data.update(
-            {
-                "query": "{}",
-                "workspaces": '[{"id": "None"},{"id": "'
-                + str(self.fixture.workspace_2.id)
-                + '"}]',
-            }
+            dict(
+                query={},
+                workspaces=[{"id": "None"}, {"id": str(self.fixture.workspace_2.id)}],
+            )
         )
 
         # Act
@@ -333,7 +325,7 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
     def test_post_filtered_by_wrong_workspace_id_returns_no_data(self):
         # Arrange
         self.data.update(
-            {"query": "{}", "workspaces": '[{"id": "507f1f77bcf86cd799439011"}]'}
+            dict(query={}, workspaces=[{"id": "507f1f77bcf86cd799439011"}])
         )
 
         # Act
