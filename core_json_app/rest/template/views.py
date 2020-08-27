@@ -11,11 +11,10 @@ from core_main_app.components.template import api as main_template_api
 
 
 class TemplateDownload(APIView):
-    """ Download a Template
-    """
+    """Download a Template"""
 
     def get_object(self, pk):
-        """ Get Template from db
+        """Get Template from db
 
         Args:
 
@@ -31,7 +30,7 @@ class TemplateDownload(APIView):
             raise Http404
 
     def get(self, request, pk):
-        """ Download the JSON Schema file from a Template
+        """Download the JSON Schema file from a Template
 
         Args:
 

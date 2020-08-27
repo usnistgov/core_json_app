@@ -8,7 +8,7 @@ from core_json_app.commons.exceptions import JSONError
 
 
 def validate_json_data(data, schema):
-    """ Validate JSON data against JSON schema
+    """Validate JSON data against JSON schema
 
     Args:
         data: dict content
@@ -24,7 +24,7 @@ def validate_json_data(data, schema):
 
 
 def is_schema_valid(schema):
-    """ Validate JSON schema
+    """Validate JSON schema
 
     Args:
         schema: string content

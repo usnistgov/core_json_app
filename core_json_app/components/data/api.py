@@ -13,7 +13,7 @@ from core_main_app.commons import exceptions as exceptions
 
 @access_control(core_main_app.access_control.api.can_write)
 def upsert(data, user):
-    """ Save or update the data.
+    """Save or update the data.
 
     Args:
         data:
@@ -31,7 +31,7 @@ def upsert(data, user):
 
 
 def _save(data):
-    """ Save the data in database
+    """Save the data in database
 
     Args:
         data:

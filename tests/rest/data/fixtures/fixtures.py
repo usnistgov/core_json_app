@@ -9,8 +9,7 @@ from tests.test_utils import get_valid_schema
 
 
 class AccessControlDataFixture(FixtureInterface):
-    """ Access Control Data fixture
-    """
+    """Access Control Data fixture"""
 
     USER_1_NO_WORKSPACE = 0
     USER_2_NO_WORKSPACE = 1
@@ -28,7 +27,7 @@ class AccessControlDataFixture(FixtureInterface):
     data_5 = None
 
     def insert_data(self):
-        """ Insert a set of Data.
+        """Insert a set of Data.
 
         Returns:
 
@@ -39,7 +38,7 @@ class AccessControlDataFixture(FixtureInterface):
         self.generate_data_collection()
 
     def generate_data_collection(self):
-        """ Generate a Data collection.
+        """Generate a Data collection.
 
         Returns:
 
@@ -77,7 +76,7 @@ class AccessControlDataFixture(FixtureInterface):
         ]
 
     def generate_template(self):
-        """ Generate an unique Template.
+        """Generate an unique Template.
 
         Returns:
 
@@ -89,7 +88,7 @@ class AccessControlDataFixture(FixtureInterface):
         self.template = template.save()
 
     def generate_workspace(self):
-        """ Generate the workspaces.
+        """Generate the workspaces.
 
         Returns:
 
@@ -102,7 +101,7 @@ class AccessControlDataFixture(FixtureInterface):
         ).save()
 
     def generate_workspace_with_perm(self):
-        """ Generate the workspaces and the perm object.
+        """Generate the workspaces and the perm object.
 
         Returns:
 

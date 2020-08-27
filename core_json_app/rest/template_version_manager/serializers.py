@@ -10,7 +10,7 @@ from core_main_app.rest.template.serializers import TemplateSerializer
 
 class CreateTemplateSerializer(TemplateSerializer):
     """
-        Template Version Manager serializer
+    Template Version Manager serializer
     """
 
     def create(self, validated_data):

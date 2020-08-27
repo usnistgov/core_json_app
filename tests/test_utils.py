@@ -10,7 +10,7 @@ from core_main_app.components.template_version_manager.models import (
 
 
 def create_template_version_manager(title="schema.json", is_disabled=False, user_id=1):
-    """ Return a mock template version manager
+    """Return a mock template version manager
 
     Args:
         title:
@@ -33,7 +33,7 @@ def create_template_version_manager(title="schema.json", is_disabled=False, user
 
 
 def create_template(content):
-    """ Get template
+    """Get template
 
     Returns:
 
@@ -45,7 +45,7 @@ def create_template(content):
 
 
 def create_data(template, user_id, title, content):
-    """ Create mock data
+    """Create mock data
 
     Args:
         template:
@@ -62,7 +62,7 @@ def create_data(template, user_id, title, content):
 
 
 def get_invalid_schema():
-    """ Return JSON schema
+    """Return JSON schema
 
     Returns:
 
@@ -74,7 +74,7 @@ def get_invalid_schema():
 
 
 def get_valid_schema():
-    """ Return JSON schema
+    """Return JSON schema
 
     Returns:
 
@@ -103,7 +103,7 @@ def get_valid_schema():
 
 
 def get_valid_data():
-    """ Return valid JSON data
+    """Return valid JSON data
 
     Args:
 
@@ -114,7 +114,7 @@ def get_valid_data():
 
 
 def get_invalid_data():
-    """ Return invalid JSON data
+    """Return invalid JSON data
 
     Args:
 
@@ -125,7 +125,7 @@ def get_invalid_data():
 
 
 def get_different_data():
-    """ Return JSON data for different schema
+    """Return JSON data for different schema
 
     Args:
 

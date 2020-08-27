@@ -105,7 +105,10 @@ class TestJsonExecuteLocalQueryViewWorkspaceCase(MongoIntegrationTransactionTest
 
         # Arrange
         self.data.update(
-            dict(query={}, workspaces=[{"id": str(self.fixture.workspace_1.id)}],)
+            dict(
+                query={},
+                workspaces=[{"id": str(self.fixture.workspace_1.id)}],
+            )
         )
 
         # Act

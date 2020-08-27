@@ -16,27 +16,24 @@ from core_main_app.utils.file import get_file_http_response
 
 
 class DataList(main_rest_views.DataList):
-    """ List all user Data, or create a new one.
-    """
+    """List all user Data, or create a new one."""
 
     permission_classes = (IsAuthenticated,)
     serializer = json_app_serializers.DataSerializer
 
 
 class DataDetail(main_rest_views.DataDetail):
-    """ Retrieve, update or delete a Data
-    """
+    """Retrieve, update or delete a Data"""
 
     permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer = json_app_serializers.DataSerializer
 
 
 class DataDownload(APIView):
-    """ Download JSON file in data
-    """
+    """Download JSON file in data"""
 
     def get_object(self, request, pk):
-        """ Get Data from db
+        """Get Data from db
 
         Args:
 
@@ -53,7 +50,7 @@ class DataDownload(APIView):
             raise Http404
 
     def get(self, request, pk):
-        """ Download the JSON file from a data
+        """Download the JSON file from a data
 
         Args:
 

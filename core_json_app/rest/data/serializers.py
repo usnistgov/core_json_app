@@ -10,12 +10,10 @@ from core_main_app.utils.xml import unparse
 
 
 class DataSerializer(DocumentSerializer):
-    """ Data serializer
-    """
+    """Data serializer"""
 
     class Meta(object):
-        """ Meta
-        """
+        """Meta"""
 
         model = Data
         fields = [
