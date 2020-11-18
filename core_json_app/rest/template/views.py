@@ -13,19 +13,20 @@ from core_main_app.components.template import api as main_template_api
 class TemplateDownload(APIView):
     """Download a Template"""
 
-    def get_object(self, pk):
+    def get_object(self, pk, request):
         """Get Template from db
 
         Args:
 
             pk: ObjectId
+            request:
 
         Returns:
 
             Template
         """
         try:
-            return main_template_api.get(pk)
+            return main_template_api.get(pk, request=request)
         except exceptions.DoesNotExist:
             raise Http404
 
@@ -48,7 +49,7 @@ class TemplateDownload(APIView):
         """
         try:
             # Get object
-            template_object = self.get_object(pk)
+            template_object = self.get_object(pk, request=request)
 
             return get_file_http_response(
                 template_object.content,

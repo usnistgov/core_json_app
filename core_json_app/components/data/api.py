@@ -11,13 +11,13 @@ from core_main_app.access_control.decorators import access_control
 from core_main_app.commons import exceptions as exceptions
 
 
-@access_control(core_main_app.access_control.api.can_write)
-def upsert(data, user):
+@access_control(core_main_app.access_control.api.can_request_write)
+def upsert(data, request):
     """Save or update the data.
 
     Args:
         data:
-        user:
+        request:
 
     Returns:
 

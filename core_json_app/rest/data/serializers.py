@@ -43,12 +43,12 @@ class DataSerializer(DocumentSerializer):
             if "workspace" in validated_data
             else None,
             title=validated_data["title"],
-            user_id=str(validated_data["user"].id),
+            user_id=str(self.context["request"].user.id),
         )
         # set xml content
         instance.xml_content = unparse(instance.dict_content, full_document=False)
         # Save the data
-        data_api.upsert(instance, validated_data["user"])
+        data_api.upsert(instance, request=self.context["request"])
 
         return instance
 
@@ -60,4 +60,4 @@ class DataSerializer(DocumentSerializer):
         instance.dict_content = validated_data.get(
             "dict_content", instance.dict_content
         )
-        return data_api.upsert(instance, validated_data["user"])
+        return data_api.upsert(instance, request=self.context["request"])

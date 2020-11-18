@@ -17,14 +17,19 @@ class CreateTemplateSerializer(TemplateSerializer):
         """
         Create and return a new `Template` instance, given the validated data.
         """
+        # TODO: check user is properly set
         template_object = Template(
-            filename=validated_data["filename"], content=validated_data["content"]
+            filename=validated_data["filename"],
+            content=validated_data["content"],
+            user=str(self.context["request"].user.id),
         )
         template_version_manager_object = validated_data["template_version_manager"]
 
         # Create the template and its template version manager
         template_version_manager_api.insert(
-            template_version_manager_object, template_object
+            template_version_manager_object,
+            template_object,
+            request=self.context["request"],
         )
 
         return template_object
